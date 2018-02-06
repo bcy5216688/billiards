@@ -2,24 +2,45 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //    default: null,      // The default value will be used only when the component attaching
-        //                           to a node for the first time
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
+        ballRoot: {
+            default: null,
+            type: cc.Node
+        },
+        whiteBallNode: {
+            default: null,
+            type: cc.Node
+        }
     },
 
-    // use this for initialization
-    onLoad: function () {
+    // onLoad: function () {
 
+    // },
+
+    start: function () {
+        this.isGameStart = true;
     },
 
-    // called every frame, uncomment this function to activate update callback
+    resetGame: function () {
+        for (var i = 0; i < this.ballRoot.childrenCount; i++) {
+            var ballNode = this.ballRoot.children[i];
+            ballNode.getComponent("ball").reset();
+        }
+        this.whiteBallNode.getComponent("whiteball").reset();
+        this.isGameStart = true;
+    },
+
+    checkIsGameOver: function () {
+        for (var i = 0; i < this.ballRoot.childrenCount; i++) {
+            var ballNode = this.ballRoot.children[i];
+            if (ballNode.active === true) {
+                return;
+            }
+        }
+
+        this.isGameStart = false;
+        this.scheduleOnce(this.resetGame.bind(this),5);
+    },
+
     // update: function (dt) {
 
     // },

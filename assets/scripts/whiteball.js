@@ -1,5 +1,8 @@
+var Ball = require("ball");
+
 cc.Class({
-    extends: cc.Component,
+    // extends: cc.Component,
+    extends: Ball,
 
     properties: {
         cueSpr: {
@@ -54,13 +57,13 @@ cc.Class({
 
     // },
 
-    reset: function () {
-        this.node.scale = 1;
-        this.node.x = this.startX;
-        this.node.y = this.startY;
-        this.rigidBody.linearVelocity = cc.p(0,0);  // Vec2 刚体在世界坐标下的线性速度
-        this.rigidBody.angularVelocity = 0;  // 刚体的角速度
-    },
+    // reset: function () {
+    //     this.node.scale = 1;
+    //     this.node.x = this.startX;
+    //     this.node.y = this.startY;
+    //     this.rigidBody.linearVelocity = cc.p(0,0);  // Vec2 刚体在世界坐标下的线性速度
+    //     this.rigidBody.angularVelocity = 0;  // 刚体的角速度
+    // },
 
     onBeginContact: function (contact, selfCollider, otherCollider) {
         // 白球可能碰到 球杆,球,桌边,球袋

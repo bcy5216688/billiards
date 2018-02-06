@@ -76,6 +76,9 @@
       },
       {
         "__id__": 118
+      },
+      {
+        "__id__": 119
       }
     ],
     "_prefab": null,
@@ -3620,6 +3623,21 @@
       "__type__": "cc.Vec2",
       "x": 0,
       "y": 0
+    }
+  },
+  {
+    "__type__": "22b0cG8S31KfboHHJBZKvyz",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "ballRoot": {
+      "__id__": 41
+    },
+    "whiteBallNode": {
+      "__id__": 31
     }
   }
 ]
