@@ -11,6 +11,9 @@ cc.Class({
 
     onLoad: function () {
         this.cueScript = this.cueSpr.getComponent("cue");
+        this.startX = this.node.x;
+        this.startY = this.node.y;
+        this.rigidBody = this.node.getComponent(cc.RigidBody);
 
         this.node.on(cc.Node.EventType.TOUCH_MOVE, function(event) {
             var worldPos = event.getLocation();
@@ -27,7 +30,7 @@ cc.Class({
             this.cueSpr.active = true;
             var vecRadian = Math.atan2(vec.y, vec.x);
             var vecDegree = vecRadian / Math.PI * 180;
-            console.log("vecDegree:" + vecDegree);
+            // console.log("vecDegree:" + vecDegree);
             this.cueSpr.rotation = 360 - vecDegree + 180;
             this.cueSpr.position = endPos;
 
@@ -50,4 +53,21 @@ cc.Class({
     // update: function (dt) {
 
     // },
+
+    reset: function () {
+        this.node.scale = 1;
+        this.node.x = this.startX;
+        this.node.y = this.startY;
+        this.rigidBody.linearVelocity = cc.p(0,0);  // Vec2 刚体在世界坐标下的线性速度
+        this.rigidBody.angularVelocity = 0;  // 刚体的角速度
+    },
+
+    onBeginContact: function (contact, selfCollider, otherCollider) {
+        // 白球可能碰到 球杆,球,桌边,球袋
+        if (otherCollider.node.groupIndex == 2) {
+            this.node.scale = 0;
+            this.scheduleOnce(this.reset.bind(this),1);  // 1秒后把白球放回原处
+            return;
+        }
+    }
 });

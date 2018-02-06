@@ -43,10 +43,10 @@ cc.Class({
         // 方向问题:  src---> dst;
         var src = this.node.getPosition();
         var dir = cc.pSub(dst, src);
-
+        console.log("dir:" + dir.x + "," + dir.y);
         var power_x = this.shootPower * dir.x;
         var power_y = this.shootPower * dir.y;
-
+        console.log("power_x, power_y:" + power_x + "," + power_y);
         // applyLinearImpulse(冲量大小向量, 球杆的原点转成世界坐标, true)
         this.body.applyLinearImpulse(cc.p(power_x, power_y), this.node.convertToWorldSpaceAR(cc.p(0, 0)), true);
     },
